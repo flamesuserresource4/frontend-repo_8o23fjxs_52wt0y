@@ -1,89 +1,85 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Spline from '@splinetool/react-spline';
 
-const SkillBubble = ({ label, delay = 0, x = 0, y = 0, reduced }) => {
-  return (
-    <motion.div
-      className="absolute select-none rounded-full bg-white/60 backdrop-blur-md shadow-lg ring-1 ring-white/50 px-3 py-1 text-xs text-gray-800"
-      initial={{ opacity: 0, scale: 0.8, x, y }}
-      animate={reduced ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1, x: [x, x + 8, x - 6, x], y: [y, y - 6, y + 8, y] }}
-      transition={{ duration: 6, ease: 'easeInOut', repeat: reduced ? 0 : Infinity, delay }}
-    >
-      {label}
-    </motion.div>
-  );
-};
-
-export default function Hero({ reducedMotion }) {
-  const shouldReduce = useReducedMotion() || reducedMotion;
-
-  const bubbles = useMemo(() => ([
-    { label: 'UI/UX', x: -120, y: -40, delay: 0.2 },
-    { label: 'Motion', x: 120, y: -10, delay: 0.6 },
-    { label: 'Prototyping', x: -60, y: 80, delay: 0.9 },
-    { label: 'Branding', x: 140, y: 70, delay: 1.2 },
-  ]), []);
+export default function Hero() {
+  const reduced = useReducedMotion();
 
   return (
-    <section id="home" className="relative h-screen w-full overflow-hidden bg-white">
+    <section id="home" className="relative min-h-[92vh] w-full overflow-hidden bg-white">
       <div className="absolute inset-0">
         <Spline scene="https://prod.spline.design/ESO6PnMadasO0hU3/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-        {/* Soft gradient glow overlay for depth */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_40%_at_50%_30%,rgba(197,228,243,0.35),transparent),radial-gradient(40%_30%_at_80%_70%,rgba(248,205,218,0.25),transparent)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_35%_at_30%_25%,rgba(197,228,243,0.35),transparent),radial-gradient(50%_35%_at_70%_75%,rgba(248,205,218,0.25),transparent)]" />
       </div>
 
-      <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col items-start justify-center px-6">
-        <motion.span
-          className="mb-4 inline-flex items-center rounded-full border border-gray-200/70 bg-white/60 px-3 py-1 text-[11px] font-medium text-gray-600 backdrop-blur-md"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          aria-label="Kollareddy Geethika — Digital Artist & UX Designer"
-        >
-          Kollareddy Geethika
-        </motion.span>
-
-        <motion.h1
-          className="max-w-3xl text-4xl font-semibold leading-tight text-gray-900 sm:text-6xl"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-        >
-          Designing digital experiences that feel alive.
-        </motion.h1>
-
-        <motion.p
-          className="mt-4 max-w-2xl text-base text-gray-700 sm:text-lg"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
-          Digital Artist & UX Designer — crafting immersive, motion-driven experiences.
-        </motion.p>
-
-        <motion.div
-          className="mt-8 flex flex-wrap gap-3"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-        >
-          <a href="#portfolio" className="group relative inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-3 text-white shadow-lg shadow-gray-900/10 transition hover:shadow-xl">
-            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#c5e4f3] to-[#f8cdda] opacity-20 transition group-hover:opacity-40" />
-            <span className="relative">Explore My World</span>
-          </a>
-          <a href="#contact" className="relative inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/70 px-6 py-3 text-gray-800 backdrop-blur-md transition hover:border-gray-400">
-            Contact Me
-          </a>
-        </motion.div>
-
-        {/* Floating skill bubbles */}
-        <div className="pointer-events-none relative mt-10 h-40 w-full max-w-lg">
-          {bubbles.map((b, idx) => (
-            <SkillBubble key={idx} {...b} reduced={shouldReduce} />
-          ))}
+      <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-6 py-24 md:grid-cols-2">
+        <div>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/70 px-3 py-1 text-[11px] text-gray-700 backdrop-blur"
+          >
+            Kollareddy Geethika • Digital Artist & UX Designer
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="mt-4 text-4xl font-semibold leading-tight text-gray-900 sm:text-6xl"
+          >
+            Digital artistry meets motion-led UX.
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="mt-4 max-w-xl text-base text-gray-700 sm:text-lg"
+          >
+            Crafting immersive, tactile experiences with 3D, kinetic type, and cinematic prototypes.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="mt-8 flex flex-wrap gap-3"
+          >
+            <a href="#portfolio" className="group relative inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-3 text-white shadow-lg shadow-gray-900/10 transition hover:shadow-xl">
+              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#c5e4f3] to-[#f8cdda] opacity-20 transition group-hover:opacity-40" />
+              <span className="relative">Explore Work</span>
+            </a>
+            <a href="#contact" className="relative inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/70 px-6 py-3 text-gray-800 backdrop-blur transition hover:border-gray-400">
+              Contact</a>
+          </motion.div>
+          <div className="mt-10 flex flex-wrap gap-2 text-xs text-gray-600">
+            {['UI/UX','Motion','Prototyping','Branding','3D'].map((t)=> (
+              <span key={t} className="rounded-full bg-white/70 px-3 py-1 ring-1 ring-gray-200 backdrop-blur">{t}</span>
+            ))}
+          </div>
+        </div>
+        <div className="relative hidden h-[520px] w-full md:block">
+          <div className="pointer-events-none absolute -inset-6 rounded-3xl bg-[radial-gradient(60%_60%_at_30%_30%,rgba(197,228,243,0.35),transparent),radial-gradient(60%_60%_at_80%_70%,rgba(248,205,218,0.25),transparent)]" />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="relative h-full w-full overflow-hidden rounded-3xl border border-white/60 bg-white/60 shadow-xl backdrop-blur"
+          >
+            <div className="absolute inset-0" aria-hidden />
+          </motion.div>
         </div>
       </div>
+
+      {!reduced && (
+        <motion.div
+          className="pointer-events-none absolute inset-x-0 bottom-10 z-10 text-center text-xs text-gray-600"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+        >
+          Scroll to explore ↓
+        </motion.div>
+      )}
     </section>
   );
 }

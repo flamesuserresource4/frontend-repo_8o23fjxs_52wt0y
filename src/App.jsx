@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Hero from './components/Hero';
-import About from './components/About';
+import ProcessSkills from './components/ProcessSkills';
 import Portfolio from './components/Portfolio';
 import ContactFooter from './components/ContactFooter';
 
@@ -14,11 +14,11 @@ export default function App() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
           <a href="#home" className="text-sm font-semibold text-gray-900">Kollareddy Geethika</a>
           <nav className="hidden items-center gap-6 text-sm text-gray-700 sm:flex">
-            <a className="hover:text-gray-900" href="#about">About</a>
-            <a className="hover:text-gray-900" href="#portfolio">Portfolio</a>
+            <a className="hover:text-gray-900" href="#process">Process</a>
+            <a className="hover:text-gray-900" href="#portfolio">Gallery</a>
             <a className="hover:text-gray-900" href="#contact">Contact</a>
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <label className="flex items-center gap-2 text-xs text-gray-700">
               <input type="checkbox" checked={reducedMotion} onChange={(e)=>setReducedMotion(e.target.checked)} />
               Reduce motion
@@ -29,7 +29,7 @@ export default function App() {
 
       <main>
         <Hero reducedMotion={reducedMotion} />
-        <About />
+        <ProcessSkills />
         <Portfolio />
         <ContactFooter />
       </main>
