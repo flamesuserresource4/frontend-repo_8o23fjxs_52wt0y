@@ -1,28 +1,46 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import Hero from './components/Hero';
+import About from './components/About';
+import Portfolio from './components/Portfolio';
+import ContactFooter from './components/ContactFooter';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
+    <div className="min-h-screen bg-white text-gray-900">
+      <header className="sticky top-0 z-40 w-full border-b border-gray-100 bg-white/70 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
+          <a href="#home" className="text-sm font-semibold text-gray-900">Kollareddy Geethika</a>
+          <nav className="hidden items-center gap-6 text-sm text-gray-700 sm:flex">
+            <a className="hover:text-gray-900" href="#about">About</a>
+            <a className="hover:text-gray-900" href="#portfolio">Portfolio</a>
+            <a className="hover:text-gray-900" href="#contact">Contact</a>
+          </nav>
+          <div className="flex items-center gap-2">
+            <label className="flex items-center gap-2 text-xs text-gray-700">
+              <input type="checkbox" checked={reducedMotion} onChange={(e)=>setReducedMotion(e.target.checked)} />
+              Reduce motion
+            </label>
+          </div>
         </div>
-      </div>
-    </div>
-  )
-}
+      </header>
 
-export default App
+      <main>
+        <Hero reducedMotion={reducedMotion} />
+        <About />
+        <Portfolio />
+        <ContactFooter />
+      </main>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="pointer-events-none fixed inset-x-0 top-0 z-30 h-24 bg-gradient-to-b from-white to-transparent"
+        aria-hidden
+      />
+    </div>
+  );
+}
